@@ -11,16 +11,24 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    public CoinManager cm;
+    public Animator animator;
+
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
+
+        //ѕередаем аниматору скорость, чтобы переключатьс€ с idle на run. Speed это название параметра.
+        //Mathf.Abs() - если передать horizontal, то при ходьбе вправо скорость будет положительной, влево отрицательной
+        //Abs() - absolute, значение будет всегда положительным.
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
         }
 
-         //¬ставить это, если нужно зажимать пробел дл€ высоты прыжка
+        //¬ставить это, если нужно зажимать пробел дл€ высоты прыжка
         //if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
         //{
         //    rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
@@ -47,6 +55,15 @@ public class PlayerMovement : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+            cm.coinCount++;
         }
     }
 }
