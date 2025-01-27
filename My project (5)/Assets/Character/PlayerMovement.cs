@@ -3,9 +3,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D body;
-    public float moveSpeed = 5f; // Скорость передвижения
-    public float jumpForce = 10f; // Сила прыжка
-    private bool isGrounded; // Проверка на контакт с землёй
+    public float moveSpeed = 5f; // РЎРєРѕСЂРѕСЃС‚СЊ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ
+    public float jumpForce = 10f; // РЎРёР»Р° РїСЂС‹Р¶РєР°
+    public bool isGrounded; // РџСЂРѕРІРµСЂРєР° РЅР° РєРѕРЅС‚Р°РєС‚ СЃ Р·РµРјР»С‘Р№
 
     void Start()
     {
@@ -17,12 +17,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Обработка движения влево и вправо
-        float horizontalInput = Input.GetAxis("Horizontal"); // Получаем ввод по оси X
+        // РћР±СЂР°Р±РѕС‚РєР° РґРІРёР¶РµРЅРёСЏ РІР»РµРІРѕ Рё РІРїСЂР°РІРѕ
+        float horizontalInput = Input.GetAxis("Horizontal"); // РџРѕР»СѓС‡Р°РµРј РІРІРѕРґ РїРѕ РѕСЃРё X
         Vector2 newVelocity = new Vector2(horizontalInput * moveSpeed, body.linearVelocity.y);
         body.linearVelocity = newVelocity;
 
-        // Прыжок
+        // РџСЂС‹Р¶РѕРє
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);

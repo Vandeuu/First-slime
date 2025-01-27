@@ -36,10 +36,26 @@
         },
         "firstmaptiles.tmx": {
             "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 322,
+                "y": 327.99999999999994
+            }
+        },
+        "rules/autotilerules.tmx": {
+            "scale": 1.3201041666666666,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 480.26513059259844,
+                "y": 319.6717430758305
+            }
+        },
+        "rules/walls.tmx": {
+            "scale": 1.3201041666666666,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 328.66666666666663,
-                "y": 337.99999999999994
+                "x": 480.26513059259844,
+                "y": 319.6717430758305
             }
         }
     },
@@ -51,6 +67,7 @@
     ],
     "project": "firstgametiles.tiled-project",
     "recentFiles": [
+        "rules/walls.tmx",
         "blender.tsx",
         "firstmaptiles.tmx",
         "D:/myfirstgame/firstgame/Assets/Tiled/firstmaptiles.tmx",
