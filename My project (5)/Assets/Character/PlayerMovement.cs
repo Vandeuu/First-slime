@@ -2,46 +2,51 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody2D body;
-    public float moveSpeed = 5f; // Скорость передвижения
-    public float jumpForce = 10f; // Сила прыжка
-    public bool isGrounded; // Проверка на контакт с землёй
+    private float horizontal;
+    public float speed;
+    public float jumpingPower;
+    private bool isFacingRight = true;
 
-    void Start()
-    {
-        if (body == null)
-        {
-            body = GetComponent<Rigidbody2D>();
-        }
-    }
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundLayer;
 
     void Update()
     {
-        // Обработка движения влево и вправо
-        float horizontalInput = Input.GetAxis("Horizontal"); // Получаем ввод по оси X
-        Vector2 newVelocity = new Vector2(horizontalInput * moveSpeed, body.linearVelocity.y);
-        body.linearVelocity = newVelocity;
+        horizontal = Input.GetAxisRaw("Horizontal");
 
-        // Прыжок
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
-            body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
         }
+
+         //�������� ���, ���� ����� �������� ������ ��� ������ ������
+        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+        } 
+
+        Flip();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void FixedUpdate()
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            isGrounded = true;
-        }
+        rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private bool IsGrounded()
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    }
+
+    private void Flip()
+    {
+        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
-            isGrounded = false;
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
         }
     }
 }
