@@ -459,7 +459,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 0}
   moveSpeed: 5
-  jumpForce: 10
+  jumpForce: 5
+  isGrounded: 0
 --- !u!50 &937014459
 Rigidbody2D:
   serializedVersion: 5
@@ -496,7 +497,7 @@ Transform:
   m_GameObject: {fileID: 937014457}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.3, y: -4.21, z: 0.0023684562}
+  m_LocalPosition: {x: -5.92, y: -5.27, z: 0.0023684562}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -590,6 +591,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8464773397240955511, guid: 1730e52ce998d6f4a9c0cd82dca2eb8a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: -8464773397240955511, guid: 1730e52ce998d6f4a9c0cd82dca2eb8a, type: 3}
       propertyPath: m_AutoTiling
       value: 0
